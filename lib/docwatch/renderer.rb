@@ -1,24 +1,20 @@
 module Docwatch
     class Renderer
-        def initialize(file_path)
-            @file_path = file_path
-        end
+        @@extensions = {}
 
-        def self.inherited(child)
-            (@@children ||= []) << child
+        # Set an extension (by symbol) as being supported by this class.
+        def self.extension(sym)
+            (@@extensions[sym] ||= []) << self
         end
 
         def self.by_filetype(file_path)
-            # The first implementor that responds to `ext` with the file extension
-            # we expect is the winner.
-            @@children.each do |renderer|
-                if File.extname(file_path) == '.' + renderer.ext
-                    return renderer.new(file_path)
-                end
-            end
+            extname = File.extname(file_path)[1..]
+            return if extname.length == 0
+            @@extensions[extname.to_sym].first.new(file_path)
+        end
 
-            # No winners; only losers
-            nil
+        def initialize(file_path)
+            @file_path = file_path
         end
 
         def js

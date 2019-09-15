@@ -1,8 +1,6 @@
 module Docwatch
     class MarkdownRenderer < Renderer
-        def self.ext
-            'md'
-        end
+        extension :md
 
         def head
             return <<~EOF

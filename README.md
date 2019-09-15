@@ -48,15 +48,15 @@ Two are supported. Feel free to contribute more.
 
 ### MarkdownRenderer
 
-Renders markdown into HTML.
+Renders markdown into an HTML page.
 
-Includes basic styling.
+Includes basic CSS.
 
 ### HtmlRenderer
 
 Renders HTML into an HTML page.
 
-Use this for a quick livereload environment in the context of an HTML file, which can include scripts, styles, and so on, similar to jsFiddle or similar.
+Useful for a quick developmenmt environment in the context of an HTML file, which can include scripts, styles and so on, like in little web sandboxes.
 
 ### Extending
 
@@ -66,7 +66,7 @@ See `renderer/markdown.rb` for an example.
 
 ## Tests
 
-Run tests with `tools/test`. Code coverage stands at roughly 95% of library code.
+Run tests with `tools/test`. Code coverage stands at roughly 95% for library code.
 
 ## Fixes or contributions
 

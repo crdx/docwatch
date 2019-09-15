@@ -1,19 +1,17 @@
 module Docwatch
     class HtmlRenderer < Renderer
-        def self.ext
-            'html'
-        end
+        extension :html
 
         def doc
             Nokogiri::HTML(contents)
         end
 
         def head
-            doc.at('head').inner_html
+            doc.at('head')&.inner_html
         end
 
         def body
-            doc.at('body').inner_html
+            doc.at('body')&.inner_html
         end
     end
 end
