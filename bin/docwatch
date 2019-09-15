@@ -1,0 +1,102 @@
+#!/usr/bin/env ruby
+require_relative '../lib/docwatch'
+include Docwatch
+
+DOCS = <<~EOF
+    Usage:
+        #{File.basename($0)} [options] <file-path>
+
+    Options:
+        -p, --port=NUM   Port to listen on [default: random]
+        -d, --debug      Debugging output
+        -v, --version    Version
+        -h, --help       Help
+
+    Renderers:
+        markdown
+        html
+
+    If the port is not specified, a random free port will be chosen.
+
+    In debug mode, incoming HTTP requests and file change event notifications
+    will be printed to stdout.
+
+    The HTML renderer is a 'null' renderer. It effectively does nothing, but is
+    useful nonetheless as it allows regular HTML files as input too.
+EOF
+
+class App
+    def initialize(opts)
+        @opts = opts
+    end
+
+    def self.run(opts)
+        new(opts).run
+    end
+
+    def params
+        @params ||= OpenStruct.new({
+            debug:      @opts['--debug'],
+            file_path:  @opts['<file-path>'],
+        })
+    end
+
+    def port
+        @port ||= if @opts['--port'] == 'random'
+            10000 + Random.random_number(50000)
+        else
+            @opts['--port']
+        end
+    end
+
+    def url
+        'http://localhost:%s' % port
+    end
+
+    def run
+        if !File.exist?(params.file_path)
+            puts 'File does not exist: %s'.red % params.file_path
+            exit 1
+        end
+
+        server = TCPServer.new(port)
+        logger = Logger.new(params.debug)
+
+        watcher = Watcher.new(params.file_path, logger)
+        watcher.start
+
+        renderer = Renderer.by_filetype(params.file_path)
+
+        Thread.new do
+            while socket = server.accept
+                Thread.new do
+                    Connection.handle(
+                        renderer,
+                        watcher,
+                        socket,
+                        logger
+                    )
+                end
+            end
+        end
+
+        puts ('Server running on ' + url).yellow
+        puts 'Press any key to open the page in the default handler'.green
+
+        begin
+            while STDIN.gets
+                system('xdg-open %s' % url)
+            end
+        rescue Interrupt => e
+            puts
+            puts 'Bye'
+        end
+    end
+end
+
+begin
+    App.run(Docopt::docopt(DOCS, version: Docwatch::VERSION))
+rescue Docopt::Exit => e
+    puts e.message
+    exit 1
+end
