@@ -8,3 +8,9 @@ require 'socket'
 require 'ostruct'
 
 require_rel 'docwatch'
+
+module Docwatch
+    def self.root
+        File.expand_path('../..', __FILE__)
+    end
+end

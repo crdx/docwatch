@@ -18,7 +18,7 @@ module Docwatch
         end
 
         def js
-            File.read('res/inject.js')
+            File.read(Docwatch.root + '/res/inject.js')
         end
 
         def to_html
