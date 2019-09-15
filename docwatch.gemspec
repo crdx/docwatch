@@ -2,7 +2,7 @@ require_relative 'lib/docwatch/version'
 
 Gem::Specification.new do |spec|
     spec.homepage = 'https://github.com/crdx/docwatch'
-    spec.summary  = 'preview markdown documents in your browser with reload on change'
+    spec.summary  = 'preview markdown documents in the browser with reload on change'
     spec.name     = 'docwatch'
     spec.version  = Docwatch::VERSION
     spec.author   = 'crdx'
