@@ -2,6 +2,7 @@ require 'require_all'
 require 'colorize'
 require 'docopt'
 require 'redcarpet'
+require 'nokogiri'
 
 require 'socket'
 require 'ostruct'

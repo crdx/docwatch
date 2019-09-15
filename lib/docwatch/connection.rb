@@ -14,37 +14,13 @@ module Docwatch
         end
 
         def handle
-            if @session.path == '/'
-                @session.respond_with_html body
-            elsif @session.path == '/wait'
-                @watcher.wait
-                @session.respond_with_text 'OK'
+            case @session.path
+                when '/'
+                    @session.respond_with_html @renderer.to_html
+                when '/wait'
+                    @watcher.wait
+                    @session.respond_with_text 'OK'
             end
-        end
-
-        private
-
-        def js
-            File.read('res/inject.js')
-        end
-
-        def body
-            return <<~EOF
-                <!doctype html>
-                <html>
-                <head>
-                <title>#{@renderer.file_path} - docwatch</title>
-                </head>
-                <body>
-                #{@renderer.to_html}
-                <script>
-                (function() {
-                #{js.chomp}
-                })()
-                </script>
-                </body>
-                </html>
-            EOF
         end
     end
 end

@@ -56,7 +56,7 @@ useful nonetheless as it allows regular HTML files as input too.
 
 ### Extending
 
-Adding a new renderer is as simple as adding a class that inherits from `Renderer` and implements the `to_html` and `self.ext` methods.
+Adding a new renderer is as simple as adding a class that inherits from `Renderer` and implements the `head`, `body`, and `self.ext` methods.
 
 The file's contents are available as `contents`.
 

@@ -1,13 +1,11 @@
 module Docwatch
     class Renderer
-        attr_reader :file_path
+        def initialize(file_path)
+            @file_path = file_path
+        end
 
         def self.inherited(child)
             (@@children ||= []) << child
-        end
-
-        def initialize(file_path)
-            @file_path = file_path
         end
 
         def self.by_filetype(file_path)
@@ -23,11 +21,42 @@ module Docwatch
             nil
         end
 
-        def to_html
+        def js
+            File.read('res/inject.js')
+        end
+
+        def head
             raise 'Not implemented'
         end
 
+        def body
+            raise 'Not implemented'
+        end
+
+        def to_html
+            return <<~EOF
+                <!doctype html>
+                <html>
+                <head>
+                #{head}
+                </head>
+                <body>
+                #{body}
+                <script>
+                (function() {
+                #{js}
+                })()
+                </script>
+                </body>
+                </html>
+            EOF
+        end
+
         protected
+
+        def file_path
+            @file_path
+        end
 
         def contents
             File.read(@file_path)

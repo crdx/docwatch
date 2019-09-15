@@ -4,8 +4,9 @@ module Docwatch
             'md'
         end
 
-        def get_css
+        def head
             return <<~EOF
+                <title>#{file_path} - docwatch</title>
                 <style>
                     body {
                         font-family: Ubuntu;
@@ -15,8 +16,8 @@ module Docwatch
             EOF
         end
 
-        def to_html
-            get_css + Redcarpet::Markdown.new(
+        def body
+            Redcarpet::Markdown.new(
                 Redcarpet::Render::HTML,
                 fenced_code_blocks: true,
                 disable_indented_code_blocks: true,

@@ -43,6 +43,7 @@ class App
 
     def port
         @port ||= if @opts['--port'] == 'random'
+            # TODO: check if this port is in use
             10000 + Random.random_number(50000)
         else
             @opts['--port']
@@ -77,18 +78,13 @@ class App
         Thread.new do
             while socket = server.accept
                 Thread.new do
-                    Connection.handle(
-                        renderer,
-                        watcher,
-                        socket,
-                        logger
-                    )
+                    Connection.handle(renderer, watcher, socket, logger)
                 end
             end
         end
 
         puts ('Started server on ' + url).yellow
-        puts 'Press any key to open in the default handler (xdg-open)'.green
+        puts 'Press enter to open in the default handler (xdg-open)'.green
 
         begin
             while STDIN.gets
