@@ -17,17 +17,17 @@ Usage:
     docwatch [options] <file-path>
 
 Options:
-    -p, --port=NUM   Port to listen on [default: random]
-    -d, --debug      Debugging output
-    -v, --version    Version
-    -h, --help       Help
+    -p, --port=VALUE   Listen port [default: 8888]
+    -v, --verbose      Verbose
+    -h, --help         Help
+    -V, --version      Version
 
 Renderers:
     markdown
     html
 ```
 
-If the port is not specified, a random port will be chosen.
+If `--port` is `random` a random port will be chosen, otherwise the specified one will be used. The default is 8888.
 
 In verbose mode, incoming HTTP requests and file change event notifications
 will be printed to stdout.

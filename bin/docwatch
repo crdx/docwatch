@@ -3,26 +3,24 @@ require_relative '../lib/docwatch'
 include Docwatch
 
 DOCS = <<~EOF
-    Usage:
-        #{File.basename($0)} [options] <file-path>
+    #{'Usage:'.bold}
+        #{File.basename($0)} [options] [<file-path>]
 
-    Options:
-        -p, --port=NUM   Port to listen on [default: random]
-        -d, --debug      Debugging output
-        -v, --version    Version
-        -h, --help       Help
+    #{'Options:'.bold}
+        -p, --port=VALUE   Listen port [default: 8888]
+        -v, --verbose      Verbose
+        -h, --help         Help
+        -V, --version      Version
 
-    Renderers:
+    #{'Renderers:'.bold}
         markdown
         html
 
-    If the port is not specified, a random free port will be chosen.
+    If #{'--port'.bold} is #{'random'.bold} a random port will be chosen, otherwise
+    the specified one will be used. The default is 8888.
 
-    In debug mode, incoming HTTP requests and file change event notifications
-    will be printed to stdout.
-
-    The HTML renderer is a 'null' renderer. It effectively does nothing, but is
-    useful nonetheless as it allows regular HTML files as input too.
+    In #{'--verbose'.bold} mode, incoming HTTP requests and file change event
+    notifications will be printed to standard output.
 EOF
 
 class App
@@ -36,8 +34,10 @@ class App
 
     def params
         @params ||= OpenStruct.new({
-            debug:      @opts['--debug'],
-            file_path:  @opts['<file-path>'],
+            verbose: @opts['--verbose'],
+            version: @opts['--version'],
+            help: @opts['--help'],
+            file_path: @opts['<file-path>']
         })
     end
 
@@ -54,25 +54,57 @@ class App
         'http://localhost:%s' % port
     end
 
+    def port_valid
+        true
+    end
+
+    def exit_usage
+        puts DOCS
+        exit 0
+    end
+
+    def exit_version
+        puts Docwatch::VERSION
+        exit 0
+    end
+
+    def exit_invalid_arguments
+        puts 'Invalid arguments'.red
+        exit 1
+    end
+
+    def exit_invalid_file
+        puts 'File does not exist: %s'.red % params.file_path
+        exit 2
+    end
+
+    def exit_unknown_renderer
+        puts 'No suitable renderer found for %s'.red % params.file_path
+        exit 3
+    end
+
+    def exit_invalid_port
+        puts 'Invalid port %s'.red % port
+    end
+
     def run
-        if !File.exist?(params.file_path)
-            puts 'File does not exist: %s'.red % params.file_path
-            exit 1
-        end
-
-        server = TCPServer.new(port)
-        logger = Logger.new(params.debug)
-
-        watcher = Watcher.new(params.file_path, logger)
-        watcher.start
+        exit_version if params.version
+        exit_usage if params.help
+        exit_invalid_arguments unless params.file_path
+        exit_invalid_file unless File.exist?(params.file_path)
+        exit_invalid_port unless port_valid
 
         renderer = Renderer.by_filetype(params.file_path)
+        exit_unknown_renderer if renderer.nil?
 
-        if renderer.nil?
-            puts 'No suitable renderer found for: %s'.red % params.file_path
-            exit 1
-        else
-            logger.log 'Using %s'.yellow % renderer.class
+        server = TCPServer.new(port)
+        logger = Logger.new(params.verbose)
+        watcher = Watcher.new(params.file_path, logger)
+
+        Thread.new do
+            loop do
+                watcher.check
+            end
         end
 
         Thread.new do
@@ -83,8 +115,8 @@ class App
             end
         end
 
-        puts ('Started server on ' + url).yellow
-        puts 'Press enter to open in the default handler (xdg-open)'.green
+        puts ('Started server on %s, renderer %s' % [url, renderer.class]).yellow
+        puts 'Press enter to open page in the default handler (xdg-open)'.green
 
         begin
             while STDIN.gets
@@ -98,8 +130,8 @@ class App
 end
 
 begin
-    App.run(Docopt::docopt(DOCS, version: Docwatch::VERSION))
+    App.run(Docopt::docopt(DOCS, help: false))
 rescue Docopt::Exit => e
-    puts e.message
+    puts 'Invalid arguments.'.red
     exit 1
 end

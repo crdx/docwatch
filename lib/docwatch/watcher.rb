@@ -8,13 +8,9 @@ module Docwatch
             @changed = Time.now
         end
 
-        def start
-            Thread.new do
-                loop do
-                    check_contents(get_contents)
-                    sleep DELAY
-                end
-            end
+        def check
+            check_contents(get_contents)
+            sleep DELAY
         end
 
         def wait
