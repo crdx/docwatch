@@ -1,0 +1,248 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/docwatch'
+include Docwatch
+
+$docs = <<~EOF
+    Usage:
+        #{File.basename($0)} [options] <file>
+
+    Options:
+        -p, --port=PORT    Port to listen on [default: 8888]
+        -v, --verbose      Verbose
+EOF
+
+$js = <<~EOF
+    <script>
+    (function() {
+        async function f() {
+            try {
+                await fetch('/wait')
+                document.location.reload()
+            } catch (e) {
+                setTimeout(f, 1000)
+            }
+        }
+        f()
+    })()
+    </script>
+EOF
+
+class Socket
+    def initialize(verbose, tcp_socket)
+        @verbose = verbose
+        @tcp_socket = tcp_socket
+        @first_line = @tcp_socket.recvmsg[0].lines.first.chomp
+    end
+
+    def print(msg)
+        @tcp_socket.print msg
+        puts '< ' + msg if @verbose
+    end
+
+    def println(msg = '')
+        print msg + "\r\n"
+    end
+
+    def close
+        @tcp_socket.close
+    end
+
+    def path
+        @first_line.split(' ')[1]
+    end
+
+    def print_preamble
+        println 'HTTP/1.1 200'
+        println 'Content-Type: text/html; charset=utf8'
+        println
+    end
+end
+
+class Connection
+    def initialize(target, socket)
+        @target = target
+        @socket = socket
+    end
+
+    def self.handle(target, socket)
+        new(target, socket).handle
+    end
+
+    def handle
+        @socket.print_preamble
+
+        if @socket.path == '/'
+            @socket.println get_body
+        elsif @socket.path == '/wait'
+            @target.wait
+        end
+
+        @socket.close
+    end
+
+    def get_body
+        "<!doctype html>\n<html><head></head><body>" + @target.to_html + $js + '</body></html>'
+    end
+end
+
+class Watcher
+    def initialize(file_path)
+        @file_path = file_path
+        @changed = Time.now
+    end
+
+    def get_contents
+        File.read(@file_path)
+    end
+
+    def check_contents(contents)
+        if @latest != contents
+            # If @latest is nil, then this is the first run. Don't show the
+            # debug message in that case.
+            if @latest
+                puts 'File changes detected; reloading'.yellow
+            end
+
+            @latest = contents
+            @changed = Time.now
+        end
+    end
+
+    def start
+        Thread.new do
+            loop do
+                check_contents(get_contents)
+                sleep 0.1
+            end
+        end
+    end
+
+    def wait
+        now = Time.now
+        while @changed < now
+            sleep 0.1
+        end
+    end
+end
+
+# Represents a file being processed.
+# Children implement to_html().
+class Target
+    def self.inherited(child)
+        (@@children ||= []) << child
+    end
+
+    def initialize(file_path)
+        @file_path = file_path
+        @watcher = Watcher.new(file_path)
+        @watcher.start
+    end
+
+    def self.get_for(file_path)
+        # The first implementor that responds to `ext` with the file extension
+        # we expect is the winner.
+        @@children.each do |target|
+            if File.extname(file_path) == '.' + target.ext
+                return target.new(file_path)
+            end
+        end
+
+        # Sadface
+        raise 'No suitable target found'
+    end
+
+    def wait
+        @watcher.wait
+    end
+
+    def to_html
+        raise 'Not implemented yet'
+    end
+
+    private
+
+    def contents
+        File.read(@file_path)
+    end
+end
+
+class MarkdownTarget < Target
+    def self.ext
+        'md'
+    end
+
+    def to_html
+        # TODO: add some basic CSS
+        Redcarpet::Markdown.new(
+            Redcarpet::Render::HTML,
+            autolink: true,
+            tables: true
+        ).render(contents)
+    end
+end
+
+class HtmlTarget < Target
+    def self.ext
+        'html'
+    end
+
+    def to_html
+        contents
+    end
+end
+
+class App
+    def initialize(opts)
+        @opts = opts
+    end
+
+    def self.run(opts)
+        new(opts).run
+    end
+
+    def port
+        @opts['--port']
+    end
+
+    def verbose
+        @opts['--verbose']
+    end
+
+    def file_path
+        @opts['<file>']
+    end
+
+    def url
+        'http://localhost:' + port
+    end
+
+    def run
+        # TODO pick port randomly, incrementally (sentimentally, meant to be)
+        server = TCPServer.new(port)
+        target = Target.get_for(file_path)
+
+        Thread.new do
+            while tcp_socket = server.accept
+                Thread.new do
+                    socket = Socket.new(verbose, tcp_socket)
+                    Connection.handle(target, socket)
+                end
+            end
+        end
+
+        puts ('Server running on ' + url).yellow
+        puts 'Press any key to open the page in the default handler'.green
+
+        while STDIN.gets
+            system('xdg-open %s' % url)
+        end
+    end
+end
+
+begin
+    App.run(Docopt::docopt($docs))
+rescue Docopt::Exit => e
+    puts e.message
+    exit 1
+end
