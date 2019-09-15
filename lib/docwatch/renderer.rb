@@ -19,8 +19,8 @@ module Docwatch
                 end
             end
 
-            # Sadface
-            raise 'No suitable renderer found'
+            # No winners; only losers
+            nil
         end
 
         def to_html

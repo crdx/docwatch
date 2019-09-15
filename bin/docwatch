@@ -67,6 +67,13 @@ class App
 
         renderer = Renderer.by_filetype(params.file_path)
 
+        if renderer.nil?
+            puts 'No suitable renderer found for: %s'.red % params.file_path
+            exit 1
+        else
+            logger.log 'Using %s'.yellow % renderer.class
+        end
+
         Thread.new do
             while socket = server.accept
                 Thread.new do
@@ -80,8 +87,8 @@ class App
             end
         end
 
-        puts ('Server running on ' + url).yellow
-        puts 'Press any key to open the page in the default handler'.green
+        puts ('Started server on ' + url).yellow
+        puts 'Press any key to open in the default handler (xdg-open)'.green
 
         begin
             while STDIN.gets
