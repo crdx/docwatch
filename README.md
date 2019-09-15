@@ -62,6 +62,10 @@ The file's contents are available as `contents`.
 
 See `renderer/markdown.rb` for an example.
 
+## Tests
+
+Run tests with `tools/test`. Code coverage stands at roughly 95% of library code.
+
 ## Fixes or contributions
 
 Open an [issue](http://github.com/crdx/docwatch/issues) or send a [pull request](http://github.com/crdx/docwatch/pulls).

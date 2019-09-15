@@ -8,10 +8,10 @@ module Docwatch
             return <<~EOF
                 <title>#{file_path} - docwatch</title>
                 <style>
-                    body {
-                        font-family: Ubuntu;
-                        font-size: 15px;
-                    }
+                body {
+                    font-family: Ubuntu;
+                    font-size: 15px;
+                }
                 </style>
             EOF
         end
@@ -21,8 +21,8 @@ module Docwatch
                 Redcarpet::Render::HTML,
                 fenced_code_blocks: true,
                 disable_indented_code_blocks: true,
-                autolink: true,
-                tables: true,
+                autolink:  true,
+                tables:    true,
                 footnotes: true,
             ).render(contents)
         end

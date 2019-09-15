@@ -25,14 +25,6 @@ module Docwatch
             File.read('res/inject.js')
         end
 
-        def head
-            raise 'Not implemented'
-        end
-
-        def body
-            raise 'Not implemented'
-        end
-
         def to_html
             return <<~EOF
                 <!doctype html>

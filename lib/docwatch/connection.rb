@@ -1,12 +1,10 @@
 module Docwatch
     class Connection
-        def initialize(renderer, watcher, socket, logger)
+        def initialize(renderer, watcher, logger, session)
             @renderer = renderer
             @watcher = watcher
-            @socket = socket
             @logger = logger
-
-            @session = Session.new(socket, logger)
+            @session = session
         end
 
         def self.handle(*opts)

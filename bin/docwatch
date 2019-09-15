@@ -99,18 +99,17 @@ class App
 
         server = TCPServer.new(port)
         logger = Logger.new(params.verbose)
-        watcher = Watcher.new(params.file_path, logger)
-
-        Thread.new do
-            loop do
-                watcher.check
-            end
-        end
+        watcher = Watcher.new(params.file_path)
 
         Thread.new do
             while socket = server.accept
                 Thread.new do
-                    Connection.handle(renderer, watcher, socket, logger)
+                    Connection.handle(
+                        renderer,
+                        watcher,
+                        logger,
+                        Session.new(socket, logger)
+                    )
                 end
             end
         end
