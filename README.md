@@ -4,7 +4,7 @@ docwatch is a tool that transparently renders and locally serves markdown (or ot
 
 ## Installation
 
-Install from [rubygems.org](https://rubygems.com/gems/docwatch).
+Install from [rubygems.org](https://rubygems.org/gems/docwatch).
 
 ```
 gem install docwatch
