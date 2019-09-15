@@ -23,8 +23,8 @@ Options:
     -V, --version      Version
 
 Renderers:
-    markdown
-    html
+    markdown (.md)
+    html     (.html)
 ```
 
 If `--port` is `random` a random port will be chosen, otherwise the specified one will be used. The default is 8888.
@@ -44,21 +44,23 @@ If there are any network issues then the page will keep retrying until the serve
 
 The renderer is figured out automatically from the file extension.
 
-Two are supported.
+Two are supported. Feel free to contribute more.
 
-| Name             | Extension |
-|------------------|-----------|
-| MarkdownRenderer | md        |
-| HtmlRenderer     | html      |
+### MarkdownRenderer
 
-The HTML renderer is a 'null' renderer. It effectively does nothing, but is
-useful nonetheless as it allows regular HTML files as input too.
+Renders markdown into HTML.
+
+Includes basic styling.
+
+### HtmlRenderer
+
+Renders HTML into an HTML page.
+
+Use this for a quick livereload environment in the context of an HTML file, which can include scripts, styles, and so on, similar to jsFiddle or similar.
 
 ### Extending
 
-Adding a new renderer is as simple as adding a class that inherits from `Renderer` and implements the `head`, `body`, and `self.ext` methods.
-
-The file's contents are available as `contents`.
+Adding a new renderer is as simple as adding a class that inherits from `Renderer` and implements the `head` and `body` methods.
 
 See `renderer/markdown.rb` for an example.
 
