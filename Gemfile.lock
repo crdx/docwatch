@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    docwatch (1.0.2)
+    docwatch (1.0.3)
       colorize (~> 0.8.1)
       docopt (~> 0.6.1)
       redcarpet (~> 3.5)
