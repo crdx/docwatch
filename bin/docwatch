@@ -107,7 +107,6 @@ class App
                     Connection.handle(
                         renderer,
                         watcher,
-                        logger,
                         Session.new(socket, logger)
                     )
                 end

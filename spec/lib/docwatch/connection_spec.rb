@@ -4,7 +4,7 @@ describe Connection do
     let (:watcher)  { double('watcher') }
     let (:socket)   { double('socket') }
     let (:logger)   { double('logger') }
-    let (:connection) { Connection.new(renderer, watcher, logger, session) }
+    let (:connection) { Connection.new(renderer, watcher, session) }
 
     it 'handles /' do
         expect(session).to receive(:path).and_return('/')
