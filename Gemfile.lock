@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    docwatch (1.0.8)
+    docwatch-bin (1.0.8)
       colorize (~> 0.8.1)
       docopt (~> 0.6.1)
       nokogiri (~> 1.10)
@@ -45,7 +45,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  docwatch!
+  docwatch-bin!
   rake (~> 12.3)
   rspec (~> 3.8)
   simplecov (~> 0.17.0)
