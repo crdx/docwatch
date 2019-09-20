@@ -19,10 +19,10 @@ Usage:
     docwatch [options] <file-path>
 
 Options:
-    -p, --port=VALUE   Listen port [default: 8888]
-    -v, --verbose      Verbose
-    -h, --help         Help
-    -V, --version      Version
+    -p, --port=VALUE    Listen port [default: 8888]
+    -v, --verbose       Be verbose
+    -V, --version       Show version
+    -h, --help          Show this help
 
 Renderers:
     markdown (.md)
@@ -31,8 +31,8 @@ Renderers:
 
 If `--port` is `random` a random port will be chosen, otherwise the specified one will be used. The default is 8888.
 
-In verbose mode, incoming HTTP requests and file change event notifications
-will be printed to stdout.
+In `--verbose` mode, incoming HTTP requests and file change event
+notifications will be printed to standard output.
 
 ## How it works
 

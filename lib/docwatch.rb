@@ -1,16 +1,16 @@
 require 'require_all'
-require 'colorize'
-require 'docopt'
 require 'redcarpet'
+require 'colorize'
 require 'nokogiri'
+require 'docopt'
 
-require 'socket'
 require 'ostruct'
-
-require_rel 'docwatch'
+require 'socket'
 
 module Docwatch
-    def self.root
+    def self.root_dir
         File.expand_path('../..', __FILE__)
     end
 end
+
+require_rel 'docwatch'

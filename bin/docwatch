@@ -2,28 +2,7 @@
 require_relative '../lib/docwatch'
 include Docwatch
 
-DOCS = <<~EOF
-    #{'Usage:'.bold}
-        #{File.basename($0)} [options] [<file-path>]
-
-    #{'Options:'.bold}
-        -p, --port=VALUE   Listen port [default: 8888]
-        -v, --verbose      Verbose
-        -h, --help         Help
-        -V, --version      Version
-
-    #{'Renderers:'.bold}
-        markdown (.md)
-        html     (.html)
-
-    If #{'--port'.bold} is #{'random'.bold} a random port will be chosen, otherwise
-    the specified one will be used. The default is 8888.
-
-    In #{'--verbose'.bold} mode, incoming HTTP requests and file change event
-    notifications will be printed to standard output.
-EOF
-
-class App
+class Main
     def initialize(opts)
         @opts = opts
     end
@@ -68,11 +47,6 @@ class App
         exit 0
     end
 
-    def exit_invalid_arguments
-        puts 'Invalid arguments'.red
-        exit 1
-    end
-
     def exit_invalid_file
         puts 'File does not exist: %s'.red % params.file_path
         exit 2
@@ -90,7 +64,6 @@ class App
     def run
         exit_version if params.version
         exit_usage if params.help
-        exit_invalid_arguments unless params.file_path
         exit_invalid_file unless File.exist?(params.file_path)
         exit_invalid_port unless port_valid
 
@@ -127,9 +100,30 @@ class App
     end
 end
 
+docs = <<~EOF
+    #{'Usage:'.bold}
+        #{File.basename($0)} [options] <file-path>
+
+    #{'Options:'.bold}
+        -p, --port=VALUE    Listen port [default: 8888]
+        -v, --verbose       Be verbose
+        -V, --version       Show version
+        -h, --help          Show this help
+
+    #{'Renderers:'.bold}
+        markdown (.md)
+        html     (.html)
+
+    If #{'--port'.bold} is #{'random'.bold} a random port will be chosen, otherwise
+    the specified one will be used. The default is 8888.
+
+    In #{'--verbose'.bold} mode, incoming HTTP requests and file change event
+    notifications will be printed to standard output.
+EOF
+
 begin
-    App.run(Docopt::docopt(DOCS, help: false))
+    Main.run(Docopt::docopt(docs, version: VERSION))
 rescue Docopt::Exit => e
-    puts 'Invalid arguments.'.red
+    puts e.message
     exit 1
 end
