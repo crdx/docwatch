@@ -12,6 +12,7 @@ module Docwatch
         end
 
         def path
+            return if first_request_line.length == 0
             first_request_line.split(' ')[1]
         end
 
@@ -40,7 +41,7 @@ module Docwatch
         end
 
         def first_request_line
-            input_lines.first.chomp
+            input_lines.each(&:chomp).first
         end
 
         def print(msg)
