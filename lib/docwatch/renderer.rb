@@ -29,7 +29,9 @@ module Docwatch
                 #{head}
                 </head>
                 <body>
+                <div class="container">
                 #{body}
+                </div>
                 <script>
                 (function() {
                 #{js}

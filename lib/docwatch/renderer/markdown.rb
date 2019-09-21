@@ -3,13 +3,11 @@ module Docwatch
         extension :md
 
         def head
+            css = File.read(Docwatch.root_dir + '/res/github-markdown.css')
             return <<~EOF
                 <title>#{file_path} - docwatch</title>
                 <style>
-                body {
-                    font-family: Ubuntu;
-                    font-size: 15px;
-                }
+                #{css}
                 </style>
             EOF
         end
