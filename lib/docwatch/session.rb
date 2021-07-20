@@ -12,7 +12,10 @@ module Docwatch
         end
 
         def path
-            return if first_request_line.length == 0
+            if first_request_line.nil? || first_request_line.length == 0
+                return
+            end
+
             first_request_line.split(' ')[1]
         end
 
