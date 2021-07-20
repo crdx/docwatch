@@ -68,7 +68,7 @@ See `renderer/markdown.rb` for an example.
 
 ## Tests
 
-Run tests with `tools/test`.
+Run tests with `just test`.
 
 Code coverage stands at roughly 95% for library code.
 
