@@ -17,6 +17,8 @@ module Docwatch
                 when '/wait'
                     @watcher.wait
                     @session.respond_with_text 'OK'
+                else
+                    @session.respond_with_404
             end
         end
     end

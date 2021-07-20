@@ -17,15 +17,19 @@ module Docwatch
         end
 
         def respond_with_text(str)
-            respond_with(str, 'text/plain')
+            respond_with(200, str, 'text/plain')
         end
 
         def respond_with_html(str)
-            respond_with(str, 'text/html')
+            respond_with(200, str, 'text/html')
         end
 
-        def respond_with(str, content_type)
-            println 'HTTP/1.1 200'
+        def respond_with_404
+            respond_with(404, 'Not Found', 'text/html')
+        end
+
+        def respond_with(code, str, content_type)
+            println 'HTTP/1.1 %d' % code
             println 'Content-Type: %s; charset=utf8' % content_type
             # println 'Connection: close'
             println
