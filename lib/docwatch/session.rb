@@ -34,7 +34,6 @@ module Docwatch
         def respond_with(code, str, content_type)
             println 'HTTP/1.1 %d' % code
             println 'Content-Type: %s; charset=utf8' % content_type
-            # println 'Connection: close'
             println
             println str
 
@@ -44,7 +43,9 @@ module Docwatch
         private
 
         def input_lines
-            @input_lines ||= @socket.recvmsg[0].lines rescue []
+            @input_lines ||= @socket.recvmsg[0].lines
+        rescue
+            []
         end
 
         def first_request_line
