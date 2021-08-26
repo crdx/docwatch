@@ -74,7 +74,7 @@ Code coverage stands at roughly 95% for library code.
 
 ## Fixes or contributions
 
-Open an [issue](http://github.com/crdx/docwatch/issues) or send a [pull request](http://github.com/crdx/docwatch/pulls).
+Open an [issue](https://github.com/crdx/docwatch/issues) or send a [pull request](https://github.com/crdx/docwatch/pulls).
 
 ## Licence
 
