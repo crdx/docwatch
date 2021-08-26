@@ -72,7 +72,7 @@ Run tests with `just test`.
 
 Code coverage stands at roughly 95% for library code.
 
-## Fixes or contributions
+## Bugs or contributions
 
 Open an [issue](https://github.com/crdx/docwatch/issues) or send a [pull request](https://github.com/crdx/docwatch/pulls).
 
