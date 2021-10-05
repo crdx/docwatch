@@ -15,7 +15,6 @@ class Main
         @params ||= OpenStruct.new({
             verbose: @opts['--verbose'],
             version: @opts['--version'],
-            help: @opts['--help'],
             file_path: @opts['<file-path>']
         })
     end
@@ -35,11 +34,6 @@ class Main
 
     def port_valid
         true
-    end
-
-    def exit_usage
-        puts DOCS
-        exit 0
     end
 
     def exit_version
@@ -63,7 +57,6 @@ class Main
 
     def run
         exit_version if params.version
-        exit_usage if params.help
         exit_invalid_file unless File.exist?(params.file_path)
         exit_invalid_port unless port_valid
 
@@ -100,30 +93,31 @@ class Main
     end
 end
 
-docs = <<~EOF
-    #{'Usage:'.bold}
+usage = <<~EOF
+    Usage:
         #{File.basename($0)} [options] <file-path>
+        #{File.basename($0)} ( --version | --help )
 
-    #{'Options:'.bold}
+    Options:
         -p, --port=VALUE    Listen port [default: 8888]
-        -v, --verbose       Be verbose
-        -V, --version       Show version
+        --verbose           Be verbose
+        -v, --version       Show version
         -h, --help          Show this help
 
-    #{'Renderers:'.bold}
-        markdown (.md)
-        html     (.html)
+    Renderers:
+        markdown    (.md)
+        html        (.html)
 
-    If #{'--port'.bold} is #{'random'.bold} a random port will be chosen, otherwise
-    the specified one will be used. The default is 8888.
+    If #{'--port'.bold} is #{'random'.bold} a random port will be chosen, otherwise the specified
+    one will be used. The default is 8888.
 
-    In #{'--verbose'.bold} mode, incoming HTTP requests and file change event
-    notifications will be printed to standard output.
+    In #{'--verbose'.bold} mode, incoming HTTP requests and file change event notifications will be
+    printed to standard output.
 EOF
 
 begin
-    Main.run(Docopt::docopt(docs, version: VERSION))
+    Main.run(Docopt::docopt(usage))
 rescue Docopt::Exit => e
-    puts e.message
-    exit 1
+    puts usage
+    exit 2
 end
