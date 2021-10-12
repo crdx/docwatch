@@ -1,0 +1,6 @@
+inherit_from: ../.rubocop.yml
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: no
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: no

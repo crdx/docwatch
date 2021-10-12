@@ -4,7 +4,7 @@ module Docwatch
             @socket = socket
             @logger = logger
 
-            logger.log first_request_line
+            logger.log(first_request_line)
         end
 
         def close
@@ -16,7 +16,7 @@ module Docwatch
                 return
             end
 
-            first_request_line.split(' ')[1]
+            first_request_line.split[1]
         end
 
         def respond_with_text(str)

@@ -15,16 +15,16 @@ class Main
         @params ||= OpenStruct.new({
             verbose: @opts['--verbose'],
             version: @opts['--version'],
-            file_path: @opts['<file-path>']
+            file_path: @opts['<file-path>'],
         })
     end
 
     def port
-        @port ||= if @opts['--port'] == 'random'
+        if @opts['--port'] == 'random'
             # TODO: check if this port is in use
-            10000 + Random.random_number(50000)
+            @port ||= 10_000 + Random.random_number(50_000)
         else
-            @opts['--port']
+            @port ||= @opts['--port']
         end
     end
 
@@ -68,12 +68,12 @@ class Main
         watcher = Watcher.new(params.file_path)
 
         Thread.new do
-            while socket = server.accept
+            while (socket = server.accept)
                 Thread.new do
                     Connection.handle(
                         renderer,
                         watcher,
-                        Session.new(socket, logger)
+                        Session.new(socket, logger),
                     )
                 end
             end
@@ -83,10 +83,10 @@ class Main
         puts 'Press enter to open page in the default handler (xdg-open)'.green
 
         begin
-            while STDIN.gets
+            while $stdin.gets
                 system('xdg-open %s' % url)
             end
-        rescue Interrupt => e
+        rescue Interrupt
             puts
             puts 'Bye'
         end
@@ -116,8 +116,8 @@ usage = <<~EOF
 EOF
 
 begin
-    Main.run(Docopt::docopt(usage))
-rescue Docopt::Exit => e
+    Main.run(Docopt.docopt(usage))
+rescue Docopt::Exit
     puts usage
     exit 2
 end

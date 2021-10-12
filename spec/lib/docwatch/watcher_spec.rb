@@ -1,2 +1,0 @@
-describe Watcher do
-end

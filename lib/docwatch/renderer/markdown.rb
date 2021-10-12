@@ -16,8 +16,8 @@ module Docwatch
             Redcarpet::Markdown.new(
                 Redcarpet::Render::HTML,
                 fenced_code_blocks: true,
-                autolink:  true,
-                tables:    true,
+                autolink: true,
+                tables: true,
                 footnotes: true,
             ).render(contents)
         end

@@ -10,7 +10,7 @@ module Docwatch
 
         def wait
             now = mtime
-            sleep 0.2 while mtime <= now
+            sleep(0.2) while mtime <= now
         end
     end
 end

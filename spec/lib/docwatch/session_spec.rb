@@ -1,6 +1,7 @@
 describe Session do
     def get_socket_and_logger
-        socket, logger = double('socket'), double('logger')
+        socket = double('socket')
+        logger = double('logger')
         expect(socket).to receive(:recvmsg).and_return(['GET / HTTP/1.1'])
         expect(logger).to receive(:log).with('GET / HTTP/1.1')
         [socket, logger]

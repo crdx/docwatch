@@ -10,6 +10,7 @@ module Docwatch
         def self.by_filetype(file_path)
             extname = File.extname(file_path)[1..]
             return if extname.length == 0
+
             @@extensions[extname.to_sym].first.new(file_path)
         end
 
@@ -44,9 +45,7 @@ module Docwatch
 
         protected
 
-        def file_path
-            @file_path
-        end
+        attr_reader :file_path
 
         def contents
             File.read(@file_path)
