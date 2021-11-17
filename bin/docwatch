@@ -2,6 +2,13 @@
 require_relative '../lib/docwatch'
 include Docwatch
 
+Params = Struct.new(
+    :verbose,
+    :version,
+    :file_path,
+    keyword_init: true,
+)
+
 class Main
     def initialize(opts)
         @opts = opts
@@ -12,11 +19,11 @@ class Main
     end
 
     def params
-        @params ||= OpenStruct.new({
+        @params ||= Params.new(
             verbose: @opts['--verbose'],
             version: @opts['--version'],
             file_path: @opts['<file-path>'],
-        })
+        )
     end
 
     def port
