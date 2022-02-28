@@ -100,10 +100,12 @@ class Main
     end
 end
 
+PROGRAM_NAME = File.basename($PROGRAM_NAME)
+
 usage = <<~EOF
     Usage:
-        #{File.basename($0)} [options] <file-path>
-        #{File.basename($0)} ( --version | --help )
+        #{PROGRAM_NAME} [options] <file-path>
+        #{PROGRAM_NAME} ( --version | --help )
 
     Options:
         -p, --port=VALUE    Listen port [default: 8888]
