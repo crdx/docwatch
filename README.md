@@ -22,7 +22,7 @@ Options:
     -p, --port=VALUE    Listen port [default: 8888]
     -v, --verbose       Be verbose
     -V, --version       Show version
-    -h, --help          Show this help
+    -h, --help          Show help
 
 Renderers:
     markdown (.md)

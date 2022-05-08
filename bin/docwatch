@@ -111,7 +111,7 @@ usage = <<~EOF
         -p, --port=VALUE    Listen port [default: 8888]
         --verbose           Be verbose
         -v, --version       Show version
-        -h, --help          Show this help
+        -h, --help          Show help
 
     Renderers:
         markdown    (.md)
