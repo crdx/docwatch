@@ -6,6 +6,8 @@ require 'docopt'
 
 require 'ostruct'
 require 'socket'
+require 'yaml'
+require 'cgi'
 
 module Docwatch
     def self.root_dir

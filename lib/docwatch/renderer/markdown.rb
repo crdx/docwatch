@@ -33,10 +33,16 @@ module Docwatch
                 hard_wrap: true, # no need for trailing spaces to create new paragraphs
             }
 
+            frontmatter, document = Parser::Frontmatter.split(contents)
+
+            if frontmatter
+                document = frontmatter.to_html + document
+            end
+
             Redcarpet::Markdown.new(
                 Redcarpet::Render::HTML.new(html_args),
                 markdown_args,
-            ).render(contents)
+            ).render(document)
         end
     end
 end
