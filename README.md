@@ -52,7 +52,7 @@ Two are supported. Feel free to contribute more.
 
 Renders markdown into an HTML page.
 
-Includes basic CSS.
+Includes basic GitHub-style CSS.
 
 ### `Renderer::Html`
 
@@ -60,7 +60,7 @@ Renders HTML into an HTML page.
 
 Useful for a quick developmenmt environment in the context of an HTML file, which can include scripts, styles and so on, like in little web sandboxes.
 
-### Extending
+#### Extending
 
 Adding a new renderer is as simple as adding a class that inherits from `Renderer` and implements the `head` and `body` methods.
 
