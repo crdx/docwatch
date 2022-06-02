@@ -95,7 +95,7 @@ class Main
             end
         rescue Interrupt
             puts
-            puts 'Bye'
+            puts 'Bye!'
         end
     end
 end
