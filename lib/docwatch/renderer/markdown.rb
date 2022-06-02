@@ -16,7 +16,6 @@ module Docwatch
             # https://github.com/vmg/redcarpet#and-its-like-really-simple-to-use
             markdown_args = {
                 fenced_code_blocks: true,
-                disable_indented_code_blocks: true,
                 tables: true,
                 no_intra_emphasis: true,
                 strikethrough: true,
