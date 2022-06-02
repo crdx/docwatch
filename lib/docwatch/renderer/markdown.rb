@@ -1,5 +1,5 @@
 module Docwatch
-    class MarkdownRenderer < Renderer
+    class Renderer::Markdown < Renderer
         extension :md
 
         def head

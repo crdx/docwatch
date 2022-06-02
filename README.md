@@ -48,13 +48,13 @@ The renderer is figured out automatically from the file extension.
 
 Two are supported. Feel free to contribute more.
 
-### MarkdownRenderer
+### `Renderer::Markdown`
 
 Renders markdown into an HTML page.
 
 Includes basic CSS.
 
-### HtmlRenderer
+### `Renderer::Html`
 
 Renders HTML into an HTML page.
 

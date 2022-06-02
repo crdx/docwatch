@@ -17,11 +17,11 @@ describe Renderer do
     end
 
     it 'picks HTML renderer' do
-        expect(html_renderer).to be_instance_of(HtmlRenderer)
+        expect(html_renderer).to be_instance_of(Renderer::Html)
     end
 
     it 'picks the markdown renderer' do
-        expect(markdown_renderer).to be_instance_of(MarkdownRenderer)
+        expect(markdown_renderer).to be_instance_of(Renderer::Markdown)
     end
 
     it 'mentions reloading and fetch' do

@@ -1,5 +1,5 @@
 module Docwatch
-    class HtmlRenderer < Renderer
+    class Renderer::Html < Renderer
         extension :html
 
         def doc
