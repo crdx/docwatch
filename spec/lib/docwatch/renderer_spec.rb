@@ -3,7 +3,7 @@ describe Renderer do
         renderer = Renderer.by_filetype('markdown.md')
         expect(renderer).to receive(:contents).at_least(1).and_return('# Header')
         expect(renderer.head).to include('<style>')
-        expect(renderer.body).to include('<h1>Header</h1>')
+        expect(renderer.body).to include('<h1 id="header">Header</h1>')
         renderer
     end
 
