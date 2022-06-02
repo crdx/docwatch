@@ -86,7 +86,7 @@ class Main
             end
         end
 
-        puts ('Started server on %s, renderer %s' % [url, renderer.class]).yellow
+        puts 'Started server on %s, renderer %s'.yellow % [url, renderer.class]
         puts 'Press enter to open page in the default handler (xdg-open)'.green
 
         begin
