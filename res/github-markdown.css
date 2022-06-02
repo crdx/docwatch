@@ -428,30 +428,3 @@
     background-color: initial;
     border: 0
 }
-
-.container .csv-data td,
-.container .csv-data th {
-    padding: 5px;
-    overflow: hidden;
-    font-size: 12px;
-    line-height: 1;
-    text-align: left;
-    white-space: nowrap
-}
-
-.container .csv-data .blob-num {
-    padding: 10px 8px 9px;
-    text-align: right;
-    background: #fff;
-    border: 0
-}
-
-.container .csv-data tr {
-    border-top: 0
-}
-
-.container .csv-data th {
-    font-weight: 600;
-    background: #f6f8fa;
-    border-top: 0
-}
