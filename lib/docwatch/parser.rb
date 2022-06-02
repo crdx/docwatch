@@ -1,4 +1,4 @@
 module Docwatch
-    class Parser
+    class Parser # rubocop:disable Lint/EmptyClass
     end
 end

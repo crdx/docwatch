@@ -28,6 +28,7 @@ module Docwatch
 
         def initialize(yaml)
             @data = YAML.safe_load(yaml)
+            super
         end
 
         def to_html
