@@ -26,9 +26,8 @@ module Docwatch
             [Frontmatter.new(frontmatter_yaml), document]
         end
 
-        def initialize(yaml)
+        def initialize(yaml) # rubocop:disable Lint/MissingSuper
             @data = YAML.safe_load(yaml)
-            super
         end
 
         def to_html
