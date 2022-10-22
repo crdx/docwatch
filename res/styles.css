@@ -3,7 +3,6 @@
 }
 
 body {
-    font-variant-ligatures: none;
     font-family: sans-serif;
     font-size: 16px;
     color: #444;
@@ -54,11 +53,13 @@ code {
 
 pre,
 pre > code {
+    font-variant-ligatures: none;
     white-space: pre;
     padding: 0;
 }
 
 pre {
+    font-variant-ligatures: none;
     border: 1px solid #CBE7F6;
     padding: 0.6rem;
     padding-left: 1rem;
