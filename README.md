@@ -52,8 +52,6 @@ Two are supported. Feel free to contribute more.
 
 Renders markdown into an HTML page.
 
-Includes basic GitHub-style CSS.
-
 ### `Renderer::Html`
 
 Renders HTML into an HTML page.
