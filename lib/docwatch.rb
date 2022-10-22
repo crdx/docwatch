@@ -1,4 +1,6 @@
 require 'require_all'
+require 'rouge'
+require 'rouge/plugins/redcarpet'
 require 'redcarpet'
 require 'colorize'
 require 'nokogiri'

@@ -2,8 +2,13 @@ module Docwatch
     class Renderer::Markdown < Renderer
         extension :md
 
+        # Rouge::Plugins::Redcarpet provides syntax highlighting support.
+        class HtmlRenderer < Redcarpet::Render::HTML
+            include Rouge::Plugins::Redcarpet
+        end
+
         def head
-            css = File.read(Docwatch.root_dir + '/res/github-markdown.css')
+            css = File.read(Docwatch.root_dir + '/res/styles.css')
             return <<~EOF
                 <title>#{file_path} - docwatch</title>
                 <style>
@@ -40,7 +45,7 @@ module Docwatch
             end
 
             Redcarpet::Markdown.new(
-                Redcarpet::Render::HTML.new(html_args),
+                HtmlRenderer.new(html_args),
                 markdown_args,
             ).render(document)
         end

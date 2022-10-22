@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-variant-ligatures: none;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #444;
+    background-color: white;
+    max-width: 70ch;
+    padding: 0.6rem;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: #0000b3;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    border: 1px solid #ccc;
+    width: 100%;
+    border-bottom: 0;
+    margin: 1rem 0;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 15px;
+}
+
+h1,
+h2,
+p {
+    margin: 1rem 0;
+}
+
+li,
+p {
+    line-height: 1.7rem;
+}
+
+code {
+    line-height: 1.4rem;
+}
+
+pre,
+pre > code {
+    white-space: pre;
+    padding: 0;
+}
+
+pre {
+    border: 1px solid #CBE7F6;
+    padding: 0.6rem;
+    padding-left: 1rem;
+    overflow: auto;
+    word-wrap: normal;
+}
+
+pre,
+code {
+    background-color: #eef7fc;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+code {
+    color: #444;
+    padding: 2px;
+    padding-left: 4px;
+    white-space: nowrap;
+}
+
+blockquote {
+    border: 1px solid #CBE7F6;
+    font-style: italic;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0.6rem;
+    padding-left: 1rem;
+    background-color: #eef7fc;
+}
+
+blockquote p:first-child {
+    margin-top: 0 !important;
+}
+
+blockquote p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/*
+    https://github.com/rouge-ruby/rouge/wiki/List-of-tokens
+*/
+
+/* Highlighting: Keywords */
+.highlight .k,
+.highlight .kn,
+.highlight .kd,
+.highlight .kp,
+.highlight .kr,
+.highlight .kc,
+.highlight .kt,
+.highlight .kv {
+    color: #0000b3;
+}
+
+/* Highlighting: Strings */
+.highlight .s,
+.highlight .sa,
+.highlight .se,
+.highlight .sb,
+.highlight .sc,
+.highlight .dl,
+.highlight .sd,
+.highlight .s2,
+.highlight .sh,
+.highlight .sx,
+.highlight .s1 {
+    color: #b30000;
+}
+
+/* Highlighting: Comments */
+.highlight .c,
+.highlight .cm,
+.highlight .c1,
+.highlight .cs {
+    color: green;
+}
+
+
+table {
+    width: 100%;
+}
+
+table th {
+    font-weight: 600;
+}
+
+table td,
+table th {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+table img {
+    background-color: initial;
+}
