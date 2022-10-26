@@ -56,7 +56,7 @@ Renders markdown into an HTML page.
 
 Renders HTML into an HTML page.
 
-Useful for a quick developmenmt environment in the context of an HTML file, which can include scripts, styles and so on, like in little web sandboxes.
+Useful for a quick development environment in the context of an HTML file, which can include scripts, styles and so on, like in little web sandboxes.
 
 #### Extending
 
