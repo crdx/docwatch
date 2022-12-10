@@ -42,7 +42,7 @@ The browser's request to `/` serves the content, along with a snippet of JavaScr
 
 If there are any network issues then the page will keep retrying until the server eventually returns.
 
-## Renderers
+##  Renderers
 
 The renderer is figured out automatically from the file extension.
 
@@ -58,7 +58,7 @@ Renders HTML into an HTML page.
 
 Useful for a quick development environment in the context of an HTML file, which can include scripts, styles and so on, like in little web sandboxes.
 
-#### Extending
+## Extending
 
 Adding a new renderer is as simple as adding a class that inherits from `Renderer` and implements the `head` and `body` methods.
 
