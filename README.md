@@ -27,8 +27,8 @@ Options:
     -h, --help              Show help
 
 Renderers:
-    markdown (.md)
-    html     (.html)
+    markdown    (.md)
+    html        (.html)
 ```
 
 If `-p/--port` is `random` a random port will be chosen, otherwise the specified one will be used. The default is 8888.
