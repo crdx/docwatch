@@ -13,7 +13,7 @@ module Docwatch
             frontmatter_yaml = ''
 
             lines.each do |line|
-                if line.strip == '---'
+                if line.strip == '---' && !in_document
                     in_frontmatter = !in_frontmatter
                     in_document = true if !in_frontmatter
                 elsif in_frontmatter
