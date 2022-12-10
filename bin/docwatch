@@ -110,7 +110,8 @@ usage = <<~EOF
         #{PROGRAM_NAME} ( --version | --help )
 
     Options:
-        -p, --port=VALUE        Listen port [default: 8888]
+        -p, --port VALUE        Listen port [default: 8888]
+                                Set to 'random' for a random port
         -d, --default-styles    Use default styling
         --verbose               Be verbose
         -v, --version           Show version
@@ -119,12 +120,6 @@ usage = <<~EOF
     Renderers:
         markdown    (.md)
         html        (.html)
-
-    If #{'--port'.bold} is #{'random'.bold} a random port will be chosen, otherwise the specified
-    one will be used. The default is 8888.
-
-    In #{'--verbose'.bold} mode, incoming HTTP requests and file change event notifications will be
-    printed to standard output.
 EOF
 
 begin

@@ -19,7 +19,8 @@ Usage:
     docwatch [options] <file-path>
 
 Options:
-    -p, --port=VALUE        Listen port [default: 8888]
+    -p, --port VALUE        Listen port [default: 8888]
+                            Set to 'random' for a random port
     -d, --default-styles    Use default styling
     --verbose               Be verbose
     -v, --version           Show version
@@ -30,10 +31,9 @@ Renderers:
     html     (.html)
 ```
 
-If `--port` is `random` a random port will be chosen, otherwise the specified one will be used. The default is 8888.
+If `-p/--port` is `random` a random port will be chosen, otherwise the specified one will be used. The default is 8888.
 
-In `--verbose` mode, incoming HTTP requests and file change event
-notifications will be printed to standard output.
+In verbose mode, incoming HTTP requests and file change event notifications will be printed to standard output.
 
 ## How it works
 
