@@ -26,7 +26,7 @@ module Docwatch
 
         def head
             return <<~EOF
-                <title>#{file_path} - docwatch</title>
+                <title>#{file_path} — docwatch</title>
                 <style>
                 #{css}
                 </style>
