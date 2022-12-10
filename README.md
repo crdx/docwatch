@@ -19,10 +19,11 @@ Usage:
     docwatch [options] <file-path>
 
 Options:
-    -p, --port=VALUE    Listen port [default: 8888]
-    -v, --verbose       Be verbose
-    -V, --version       Show version
-    -h, --help          Show help
+    -p, --port=VALUE        Listen port [default: 8888]
+    -d, --default-styles    Use default styling
+    --verbose               Be verbose
+    -v, --version           Show version
+    -h, --help              Show help
 
 Renderers:
     markdown (.md)
@@ -51,6 +52,8 @@ Two are supported. Feel free to contribute more.
 ### `Renderer::Markdown`
 
 Renders markdown into an HTML page.
+
+Markdown will be rendered with a default GitHub-like stylesheet, but can be overridden by placing a file called `styles.css` in the `$XDG_CONFIG_HOME/docwatch` directory (normally `~/.config/docwatch`). Use `-d/--default-styles` to ignore the override stylesheet.
 
 ### `Renderer::Html`
 

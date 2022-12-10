@@ -7,15 +7,16 @@ module Docwatch
             (@@extensions[sym] ||= []) << self
         end
 
-        def self.by_filetype(file_path)
+        def self.by_filetype(file_path, default_styles)
             extname = File.extname(file_path)[1..]
             return if extname.length == 0
 
-            @@extensions[extname.to_sym].first.new(file_path)
+            @@extensions[extname.to_sym].first.new(file_path, default_styles)
         end
 
-        def initialize(file_path)
+        def initialize(file_path, default_styles)
             @file_path = file_path
+            @default_styles = default_styles
         end
 
         def js

@@ -6,6 +6,7 @@ Params = Struct.new(
     :verbose,
     :version,
     :file_path,
+    :default_styles,
     keyword_init: true,
 )
 
@@ -23,6 +24,7 @@ class Main
             verbose: @opts['--verbose'],
             version: @opts['--version'],
             file_path: @opts['<file-path>'],
+            default_styles: @opts['--default-styles'],
         )
     end
 
@@ -67,7 +69,7 @@ class Main
         exit_invalid_file unless File.exist?(params.file_path)
         exit_invalid_port unless port_valid
 
-        renderer = Renderer.by_filetype(params.file_path)
+        renderer = Renderer.by_filetype(params.file_path, params.default_styles)
         exit_unknown_renderer if renderer.nil?
 
         server = TCPServer.new(port)
@@ -108,10 +110,11 @@ usage = <<~EOF
         #{PROGRAM_NAME} ( --version | --help )
 
     Options:
-        -p, --port=VALUE    Listen port [default: 8888]
-        --verbose           Be verbose
-        -v, --version       Show version
-        -h, --help          Show help
+        -p, --port=VALUE        Listen port [default: 8888]
+        -d, --default-styles    Use default styling
+        --verbose               Be verbose
+        -v, --version           Show version
+        -h, --help              Show help
 
     Renderers:
         markdown    (.md)

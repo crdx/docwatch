@@ -7,8 +7,24 @@ module Docwatch
             include Rouge::Plugins::Redcarpet
         end
 
+        def default_css
+            File.read(Docwatch.root_dir + '/res/styles.css')
+        end
+
+        def css
+            return default_css if @default_styles
+
+            config_dir = ENV.fetch('XDG_CONFIG_HOME', File.expand_path('~/.config'))
+            styles_path = File.join(config_dir, 'docwatch', 'styles.css')
+
+            if File.exist?(styles_path)
+                File.read(styles_path)
+            else
+                default_css
+            end
+        end
+
         def head
-            css = File.read(Docwatch.root_dir + '/res/styles.css')
             return <<~EOF
                 <title>#{file_path} - docwatch</title>
                 <style>
