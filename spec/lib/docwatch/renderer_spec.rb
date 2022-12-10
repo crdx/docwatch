@@ -1,6 +1,6 @@
 describe Renderer do
     let (:markdown_renderer) do
-        renderer = Renderer.by_filetype('markdown.md')
+        renderer = Renderer.by_filetype('markdown.md', false)
         expect(renderer).to receive(:contents).at_least(1).and_return('# Header')
         expect(renderer.head).to include('<style>')
         expect(renderer.body).to include('<h1 id="header">Header</h1>')
@@ -8,7 +8,7 @@ describe Renderer do
     end
 
     let (:html_renderer) do
-        renderer = Renderer.by_filetype('html.html')
+        renderer = Renderer.by_filetype('html.html', false)
         html = '<html><head><title>Hello</title></head><body><b>body</b></body></html>'
         expect(renderer).to receive(:contents).at_least(1).and_return(html)
         expect(renderer.body).to include('<b>body</b>')
