@@ -27,7 +27,7 @@ module Docwatch
         end
 
         def initialize(yaml) # rubocop:disable Lint/MissingSuper
-            @data = YAML.safe_load(yaml)
+            @data = YAML.safe_load(yaml, permitted_classes: [Time, Date])
         end
 
         def to_html

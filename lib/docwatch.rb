@@ -10,6 +10,7 @@ require 'ostruct'
 require 'socket'
 require 'yaml'
 require 'cgi'
+require 'date'
 
 module Docwatch
     def self.root_dir
