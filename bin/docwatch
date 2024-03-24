@@ -107,7 +107,7 @@ PROGRAM_NAME = File.basename($PROGRAM_NAME)
 usage = <<~EOF
     Usage:
         #{PROGRAM_NAME} [options] <file-path>
-        #{PROGRAM_NAME} ( --version | --help )
+        #{PROGRAM_NAME} --version
 
     Options:
         -p, --port VALUE        Listen port [default: 8888]
@@ -115,7 +115,6 @@ usage = <<~EOF
         -d, --default-styles    Use default styling
         --verbose               Be verbose
         -v, --version           Show version
-        -h, --help              Show help
 
     Renderers:
         markdown    (.md)

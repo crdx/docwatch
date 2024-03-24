@@ -24,7 +24,6 @@ Options:
     -d, --default-styles    Use default styling
     --verbose               Be verbose
     -v, --version           Show version
-    -h, --help              Show help
 
 Renderers:
     markdown    (.md)
