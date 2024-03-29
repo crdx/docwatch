@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    docwatch-bin (2.4.0)
+    docwatch-bin (2.4.1)
       colorize (~> 0.8.1)
       docopt (~> 0.6.1)
       json (~> 2.7)
