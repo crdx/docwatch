@@ -3,7 +3,7 @@ module Docwatch
         def self.split(str)
             lines = str.lines
 
-            if lines.first.chomp != '---'
+            if lines.length == 0 || lines.first.chomp != '---'
                 return [nil, str]
             end
 
