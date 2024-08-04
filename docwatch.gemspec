@@ -14,13 +14,13 @@ Gem::Specification.new do |spec|
     spec.files = Dir['{lib,res}/**/*']
     spec.executables = ['docwatch']
 
-    spec.add_runtime_dependency 'colorize', '~> 0.8.1'
-    spec.add_runtime_dependency 'docopt', '~> 0.6.1'
-    spec.add_runtime_dependency 'json', '~> 2.7'
-    spec.add_runtime_dependency 'nokogiri', '~> 1.10'
-    spec.add_runtime_dependency 'redcarpet', '~> 3.5'
-    spec.add_runtime_dependency 'require_all', '~> 3.0'
-    spec.add_runtime_dependency 'rouge', '~> 4.0'
+    spec.add_dependency 'colorize', '~> 0.8.1'
+    spec.add_dependency 'docopt', '~> 0.6.1'
+    spec.add_dependency 'json', '~> 2.7'
+    spec.add_dependency 'nokogiri', '~> 1.10'
+    spec.add_dependency 'redcarpet', '~> 3.5'
+    spec.add_dependency 'require_all', '~> 3.0'
+    spec.add_dependency 'rouge', '~> 4.0'
 
     spec.add_development_dependency 'rake', '~> 13.0'
 end
