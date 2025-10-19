@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
     spec.add_dependency 'json', '~> 2.7'
     spec.add_dependency 'nokogiri', '~> 1.10'
     spec.add_dependency 'redcarpet', '~> 3.5'
-    spec.add_dependency 'require_all', '~> 3.0'
     spec.add_dependency 'rouge', '~> 4.0'
 
     spec.add_development_dependency 'rake', '~> 13.0'

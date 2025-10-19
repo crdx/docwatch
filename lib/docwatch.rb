@@ -1,4 +1,3 @@
-require 'require_all'
 require 'rouge'
 require 'rouge/plugins/redcarpet'
 require 'redcarpet'
@@ -18,4 +17,14 @@ module Docwatch
     end
 end
 
-require_rel 'docwatch'
+require_relative 'docwatch/connection'
+require_relative 'docwatch/logger'
+require_relative 'docwatch/parser'
+require_relative 'docwatch/parser/frontmatter'
+require_relative 'docwatch/renderer'
+require_relative 'docwatch/renderer/html'
+require_relative 'docwatch/renderer/markdown'
+require_relative 'docwatch/session'
+require_relative 'docwatch/util/html'
+require_relative 'docwatch/version'
+require_relative 'docwatch/watcher'

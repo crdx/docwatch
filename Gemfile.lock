@@ -7,7 +7,6 @@ PATH
       json (~> 2.7)
       nokogiri (~> 1.10)
       redcarpet (~> 3.5)
-      require_all (~> 3.0)
       rouge (~> 4.0)
 
 GEM
@@ -25,7 +24,6 @@ GEM
     racc (1.7.3)
     rake (13.0.6)
     redcarpet (3.5.1)
-    require_all (3.0.0)
     rouge (4.0.0)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
