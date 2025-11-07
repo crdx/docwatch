@@ -41,7 +41,7 @@ class Main
         'http://localhost:%s' % port
     end
 
-    def port_valid
+    def port_valid?
         true
     end
 
@@ -67,7 +67,7 @@ class Main
     def run
         exit_version if params.version
         exit_invalid_file unless File.exist?(params.file_path)
-        exit_invalid_port unless port_valid
+        exit_invalid_port unless port_valid?
 
         renderer = Renderer.by_filetype(params.file_path, params.default_styles)
         exit_unknown_renderer if renderer.nil?
