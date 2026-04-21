@@ -1,6 +1,6 @@
 # docwatch
 
-docwatch is a tool that transparently renders and locally serves markdown (or other) documents during editing, and reloads the page on change.
+**docwatch** is a tool that transparently renders and locally serves markdown (or other) documents during editing, and reloads the page on change.
 
 ## Installation
 
