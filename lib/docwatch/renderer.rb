@@ -23,7 +23,7 @@ module Docwatch
             File.read(Docwatch.root_dir + '/res/inject.js')
         end
 
-        def to_html
+        def to_html(static: false)
             return <<~EOF
                 <!doctype html>
                 <html>
@@ -32,11 +32,7 @@ module Docwatch
                 </head>
                 <body>
                 #{body}
-                <script>
-                (function() {
-                #{js}
-                })()
-                </script>
+                #{static ? '' : "<script>\n(function() {\n#{js}\n})()\n</script>"}
                 </body>
                 </html>
             EOF

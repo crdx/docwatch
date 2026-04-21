@@ -7,6 +7,7 @@ Params = Struct.new(
     :version,
     :file_path,
     :default_styles,
+    :output,
     keyword_init: true,
 )
 
@@ -25,6 +26,7 @@ class Main
             version: @opts['--version'],
             file_path: @opts['<file-path>'],
             default_styles: @opts['--default-styles'],
+            output: @opts['--output'],
         )
     end
 
@@ -67,10 +69,17 @@ class Main
     def run
         exit_version if params.version
         exit_invalid_file unless File.exist?(params.file_path)
-        exit_invalid_port unless port_valid?
 
         renderer = Renderer.by_filetype(params.file_path, params.default_styles)
         exit_unknown_renderer if renderer.nil?
+
+        if params.output
+            File.write(params.output, renderer.to_html(static: true))
+            puts 'Wrote %s'.green % params.output
+            exit 0
+        end
+
+        exit_invalid_port unless port_valid?
 
         server = TCPServer.new(port)
         logger = Logger.new(params.verbose)
@@ -110,6 +119,7 @@ usage = <<~EOF
         #{PROGRAM_NAME} --version
 
     Options:
+        -o, --output FILE       Render once to file and exit
         -p, --port VALUE        Listen port [default: 8888]
                                 Set to 'random' for a random port
         -d, --default-styles    Use default styling

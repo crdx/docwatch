@@ -19,6 +19,7 @@ Usage:
     docwatch [options] <file-path>
 
 Options:
+    -o, --output FILE       Render once to file and exit
     -p, --port VALUE        Listen port [default: 8888]
                             Set to 'random' for a random port
     -d, --default-styles    Use default styling
