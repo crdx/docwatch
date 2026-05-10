@@ -53,7 +53,7 @@ Two are supported. Feel free to contribute more.
 
 Renders markdown into an HTML page.
 
-Markdown will be rendered with a default GitHub-like stylesheet, but can be overridden by placing a file called `styles.css` in the `$XDG_CONFIG_HOME/docwatch` directory (normally `~/.config/docwatch`). Use `-d/--default-styles` to ignore the override stylesheet.
+Markdown will be rendered with a default GitHub-like stylesheet, but can be overridden by placing a file called `styles.css` in the `$XDG_CONFIG_HOME/org.crdx/docwatch` directory (normally `~/.config/org.crdx/docwatch`). Use `-d/--default-styles` to ignore the override stylesheet.
 
 ### `Renderer::Html`
 

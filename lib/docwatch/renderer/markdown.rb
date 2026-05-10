@@ -14,11 +14,10 @@ module Docwatch
         def css
             return default_css if @default_styles
 
-            config_dir = ENV.fetch('XDG_CONFIG_HOME', File.expand_path('~/.config'))
-            styles_path = File.join(config_dir, 'docwatch', 'styles.css')
+            path = Docwatch::Config.styles_path
 
-            if File.exist?(styles_path)
-                File.read(styles_path)
+            if path
+                File.read(path)
             else
                 default_css
             end

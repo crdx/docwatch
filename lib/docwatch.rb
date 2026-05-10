@@ -17,6 +17,7 @@ module Docwatch
     end
 end
 
+require_relative 'docwatch/config'
 require_relative 'docwatch/connection'
 require_relative 'docwatch/logger'
 require_relative 'docwatch/parser'
