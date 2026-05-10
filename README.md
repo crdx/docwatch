@@ -43,7 +43,7 @@ The browser's request to `/` serves the content, along with a snippet of JavaScr
 
 If there are any network issues then the page will keep retrying until the server eventually returns.
 
-##  Renderers
+## Renderers
 
 The renderer is figured out automatically from the file extension.
 
