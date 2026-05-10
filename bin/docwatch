@@ -7,6 +7,7 @@ Params = Struct.new(
     :version,
     :file_path,
     :default_styles,
+    :style,
     :output,
     keyword_init: true,
 )
@@ -26,6 +27,7 @@ class Main
             version: @opts['--version'],
             file_path: @opts['<file-path>'],
             default_styles: @opts['--default-styles'],
+            style: @opts['--style'],
             output: @opts['--output'],
         )
     end
@@ -70,7 +72,14 @@ class Main
         exit_version if params.version
         exit_invalid_file unless File.exist?(params.file_path)
 
-        renderer = Renderer.by_filetype(params.file_path, params.default_styles)
+        config = Docwatch::Config.new
+
+        if params.style && config.styles_path(profile: params.style).nil?
+            puts('Unknown or missing style profile: %s'.red % params.style)
+            exit 4
+        end
+
+        renderer = Renderer.by_filetype(params.file_path, params.default_styles, config, params.style)
         exit_unknown_renderer if renderer.nil?
 
         if params.output
@@ -122,6 +131,7 @@ usage = <<~EOF
         -o, --output FILE       Render once to file and exit
         -p, --port VALUE        Listen port [default: 8888]
                                 Set to 'random' for a random port
+        -s, --style NAME        Use named style profile
         -d, --default-styles    Use default styling
         --verbose               Be verbose
         -v, --version           Show version

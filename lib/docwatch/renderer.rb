@@ -7,16 +7,18 @@ module Docwatch
             (@@extensions[sym] ||= []) << self
         end
 
-        def self.by_filetype(file_path, default_styles)
+        def self.by_filetype(file_path, default_styles, config = nil, style = nil)
             extname = File.extname(file_path)[1..]
             return if extname.length == 0
 
-            @@extensions[extname.to_sym].first.new(file_path, default_styles)
+            @@extensions[extname.to_sym].first.new(file_path, default_styles, config, style)
         end
 
-        def initialize(file_path, default_styles)
+        def initialize(file_path, default_styles, config = nil, style = nil)
             @file_path = file_path
             @default_styles = default_styles
+            @config = config
+            @style = style
         end
 
         def js
@@ -24,18 +26,14 @@ module Docwatch
         end
 
         def to_html(static: false)
-            return <<~EOF
-                <!doctype html>
-                <html>
-                <head>
-                #{head}
-                </head>
-                <body>
-                #{body}
-                #{static ? '' : "<script>\n(function() {\n#{js}\n})()\n</script>"}
-                </body>
-                </html>
-            EOF
+            parts = ['<!doctype html>', '<html>', '<head>', head, '</head>', '<body>', body]
+
+            if !static
+                parts << "<script>\n(function() {\n#{js}\n})()\n</script>"
+            end
+
+            parts.push('</body>', '</html>')
+            parts.join("\n")
         end
 
         protected

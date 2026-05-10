@@ -22,6 +22,7 @@ Options:
     -o, --output FILE       Render once to file and exit
     -p, --port VALUE        Listen port [default: 8888]
                             Set to 'random' for a random port
+    -s, --style NAME        Use named style profile
     -d, --default-styles    Use default styling
     --verbose               Be verbose
     -v, --version           Show version
@@ -53,7 +54,7 @@ Two are supported. Feel free to contribute more.
 
 Renders markdown into an HTML page.
 
-Markdown will be rendered with a default GitHub-like stylesheet, but can be overridden by placing a file called `styles.css` in the `$XDG_CONFIG_HOME/org.crdx/docwatch` directory (normally `~/.config/org.crdx/docwatch`). Use `-d/--default-styles` to ignore the override stylesheet.
+Markdown will be rendered with a default GitHub-like stylesheet. Custom styling can be configured via profiles (see below) or by placing a `styles.css` in the config directory. Use `-d/--default-styles` to ignore all custom styling.
 
 ### `Renderer::Html`
 

@@ -13,8 +13,9 @@ module Docwatch
 
         def css
             return default_css if @default_styles
+            return default_css unless @config
 
-            path = Docwatch::Config.styles_path
+            path = @config.styles_path(profile: @style)
 
             if path
                 File.read(path)

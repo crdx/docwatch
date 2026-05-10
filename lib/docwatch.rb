@@ -4,6 +4,7 @@ require 'redcarpet'
 require 'colorize'
 require 'nokogiri'
 require 'docopt'
+require 'toml-rb'
 
 require 'ostruct'
 require 'socket'

@@ -8,10 +8,12 @@ PATH
       nokogiri (~> 1.10)
       redcarpet (~> 3.5)
       rouge (~> 4.0)
+      toml-rb (~> 3.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    citrus (3.0.2)
     colorize (0.8.1)
     diff-lcs (1.6.2)
     docile (1.4.1)
@@ -45,6 +47,9 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
+    toml-rb (3.0.1)
+      citrus (~> 3.0, > 3.0)
+      racc (~> 1.7)
 
 PLATFORMS
   ruby
