@@ -2,5 +2,3 @@
 set -euo pipefail
 
 bundle exec rake release
-git push
-git push --tags

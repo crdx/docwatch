@@ -1,0 +1,34 @@
+name: release
+
+on:
+    push:
+        tags:
+            - "v*"
+
+permissions:
+    contents: write
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+            - name: Extract changelog
+              id: changelog
+              run: |
+                  VERSION="${GITHUB_REF_NAME#v}"
+                  BODY=$(awk "/^## \[${VERSION}\]/{found=1; next} /^## \[/{if(found) exit} found{print}" CHANGELOG.md)
+                  {
+                      echo "body<<EOF"
+                      echo "$BODY"
+                      echo "EOF"
+                  } >> "$GITHUB_OUTPUT"
+
+            - name: Create release
+              run: |
+                  TAG="${GITHUB_REF#refs/tags/}"
+                  gh release create "$TAG" --title "$TAG" --notes "$BODY"
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  BODY: ${{ steps.changelog.outputs.body }}

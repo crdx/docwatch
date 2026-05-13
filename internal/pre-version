@@ -4,5 +4,5 @@ set -euo pipefail
 read -rp "Press enter to deploy v$1"
 sed -i "s/VERSION = .*/VERSION = '$1'/" lib/*/version.rb
 bundle install
-git add lib/*/version.rb Gemfile.lock
+git add lib/*/version.rb Gemfile.lock CHANGELOG.md
 git commit -m "Release v$1"
