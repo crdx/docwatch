@@ -14,11 +14,15 @@ jobs:
         steps:
             - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+            - name: Install just
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y just
+
             - name: Extract changelog
               id: changelog
               run: |
-                  VERSION="${GITHUB_REF_NAME#v}"
-                  BODY=$(awk "/^## \[${VERSION}\]/{found=1; next} /^## \[/{if(found) exit} found{print}" CHANGELOG.md)
+                  BODY=$(just release::notes "${GITHUB_REF_NAME}")
                   {
                       echo "body<<EOF"
                       echo "$BODY"
