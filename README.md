@@ -17,6 +17,7 @@ The binary is called `docwatch`.
 ```
 Usage:
     docwatch [options] <file-path>
+    docwatch --version
 
 Options:
     -o, --output FILE       Render once to file and exit
