@@ -4,7 +4,7 @@
 
 ### Changed
 
-- No user-facing changes.
+- No user-facing changes
 
 ## [2.6.0] - 2026-05-14
 
