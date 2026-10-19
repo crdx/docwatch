@@ -1,17 +1,12 @@
 # Changelog
 
-## [2.7.1] - 2026-05-20
+## [Next]
 
-### Changed
+## [2.7.1] - 2026-05-20
 
 - No user-facing changes
 
 ## [2.6.0] - 2026-05-14
 
-### Added
-
-- Style profiles
-
-### Changed
-
+- Add style profiles
 - Migrate config to org.crdx layout
